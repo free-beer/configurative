@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Configurator::VERSION
   spec.authors       = ["Peter Wood"]
   spec.email         = ["peter.wood@longboat.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{A library for handling Ruby configuration settings.}
+  spec.description   = %q{A library for handling Ruby configuration settings. Inspired by the Settingslogic library but providing some additional functionality.}
+  spec.homepage      = "https://github.com/free-beer/configurator"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
