@@ -1,13 +1,13 @@
 require "spec_helper"
 
-describe Configurator::Settings do
+describe Configurative::Settings do
   before do
-    Configurator::Settings.reset
+    Configurative::Settings.reset
   end
 
   describe "when a source file is available" do
     subject {
-      Configurator::Settings.new(files: [File.join(Dir.getwd, "spec", "data", "environment_test.yml")])
+      Configurative::Settings.new(files: [File.join(Dir.getwd, "spec", "data", "environment_test.yml")])
     }
 
     it "autoloads the files contents" do
@@ -19,7 +19,7 @@ describe Configurator::Settings do
 
   describe "#[]()" do
     subject {
-      Configurator::Settings.new
+      Configurative::Settings.new
     }
 
     before do
@@ -42,20 +42,20 @@ describe Configurator::Settings do
 
     describe "at the class level" do
       it "returns the requested value if it exists" do
-        expect(Configurator::Settings[:one]).to eq(1)
-        expect(Configurator::Settings[:two]).to eq("Two")
-        expect(Configurator::Settings[:three]).to eq(3)
+        expect(Configurative::Settings[:one]).to eq(1)
+        expect(Configurative::Settings[:two]).to eq("Two")
+        expect(Configurative::Settings[:three]).to eq(3)
       end
 
       it "returns nil if the requested value does not exist" do
-        expect(Configurator::Settings[:non_existent]).to be_nil
+        expect(Configurative::Settings[:non_existent]).to be_nil
       end
     end
   end
 
   describe "#[]=()" do
     subject {
-      Configurator::Settings.new
+      Configurative::Settings.new
     }
 
     describe "at the instance level" do
@@ -68,15 +68,15 @@ describe Configurator::Settings do
 
     describe "at the class level" do
       it "assigns a value to a key" do
-        Configurator::Settings[:value] = "Value"
-        expect(Configurator::Settings.value).to eq("Value")
+        Configurative::Settings[:value] = "Value"
+        expect(Configurative::Settings.value).to eq("Value")
       end
     end
   end
 
   describe "#fetch()" do
     subject {
-      Configurator::Settings.new
+      Configurative::Settings.new
     }
 
     before do
@@ -100,21 +100,21 @@ describe Configurator::Settings do
 
     describe "at the class level" do
       it "returns the requested value if it exists" do
-        expect(Configurator::Settings.fetch(:one)).to eq(1)
-        expect(Configurator::Settings.fetch(:two)).to eq("Two")
-        expect(Configurator::Settings.fetch(:three)).to eq(3)
+        expect(Configurative::Settings.fetch(:one)).to eq(1)
+        expect(Configurative::Settings.fetch(:two)).to eq("Two")
+        expect(Configurative::Settings.fetch(:three)).to eq(3)
       end
 
       it "returns the alternative value if the requested value does not exist" do
-        expect(Configurator::Settings.fetch(:non_existent)).to be_nil
-        expect(Configurator::Settings.fetch(:non_existent, "blah")).to eq("blah")
+        expect(Configurative::Settings.fetch(:non_existent)).to be_nil
+        expect(Configurative::Settings.fetch(:non_existent, "blah")).to eq("blah")
       end
     end
   end
 
   describe "#include?()" do
     subject {
-      Configurator::Settings.new
+      Configurative::Settings.new
     }
 
     before do
@@ -133,22 +133,22 @@ describe Configurator::Settings do
 
     describe "at the class level" do
       it "returns true if the specified key exists" do
-        expect(Configurator::Settings.include?(:one)).to eq(true)
+        expect(Configurative::Settings.include?(:one)).to eq(true)
       end
 
       it "returns false if the specified key does not exist" do
-        expect(Configurator::Settings.include?(:blah)).to eq(false)
+        expect(Configurative::Settings.include?(:blah)).to eq(false)
       end
     end
   end
 
   describe "#empty?()" do
     subject {
-      Configurator::Settings.new
+      Configurative::Settings.new
     }
 
     before do
-      Configurator::Settings.reset(true)
+      Configurative::Settings.reset(true)
     end
 
     describe "at the instance level" do
@@ -164,19 +164,19 @@ describe Configurator::Settings do
 
     describe "at the class level" do
       it "returns true if no values have been set" do
-        expect(Configurator::Settings.empty?).to eq(true)
+        expect(Configurative::Settings.empty?).to eq(true)
       end
 
       it "returns false if at least one value has been set" do
-        Configurator::Settings.one = 1
-        expect(Configurator::Settings.empty?).to eq(false)
+        Configurative::Settings.one = 1
+        expect(Configurative::Settings.empty?).to eq(false)
       end
     end
   end
 
   describe "derived classes" do
     describe "using the files setting" do
-      class TestClass1 < Configurator::Settings
+      class TestClass1 < Configurative::Settings
         files File.join(Dir.getwd, "spec", "data", "non_existent.yml"),
               File.join(Dir.getwd, "spec", "data", "test.yml")
       end
@@ -192,7 +192,7 @@ describe Configurator::Settings do
     end
 
     describe "using the environment setting" do
-      class TestClass2 < Configurator::Settings
+      class TestClass2 < Configurative::Settings
         files File.join(Dir.getwd, "spec", "data", "environment_test.yml")
         environment "production"
       end
@@ -208,7 +208,7 @@ describe Configurator::Settings do
     end
 
     describe "using the section setting" do
-      class TestClass3 < Configurator::Settings
+      class TestClass3 < Configurative::Settings
         files File.join(Dir.getwd, "spec", "data", "section_test.yml")
         section "section3"
       end

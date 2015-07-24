@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Configurator::SettingsParser do
+describe Configurative::SettingsParser do
   subject {
-    Configurator::SettingsLoader.new
+    Configurative::SettingsLoader.new
   }
 
   describe "#load!()" do
@@ -44,7 +44,7 @@ describe Configurator::SettingsParser do
       }
 
       subject {
-        Configurator::SettingsLoader.new(section: "section2")
+        Configurative::SettingsLoader.new(section: "section2")
       }
 
       it "picks up the settings for the specified environment" do
@@ -79,7 +79,7 @@ describe Configurator::SettingsParser do
       }
 
       subject {
-        Configurator::SettingsLoader.new(section: "section2")
+        Configurative::SettingsLoader.new(section: "section2")
       }
 
       it "returns only the specified sections contents if it exists" do
@@ -93,7 +93,7 @@ describe Configurator::SettingsParser do
       end
 
       it "returns the entire contents if a matching section does not exist" do
-        output = Configurator::SettingsLoader.new(section: "blah").load!(path)
+        output = Configurative::SettingsLoader.new(section: "blah").load!(path)
         expect(output.section1).not_to be_nil
         expect(output.section2).not_to be_nil
         expect(output.section3).not_to be_nil
@@ -103,14 +103,14 @@ describe Configurator::SettingsParser do
     it "raises an exception if given a non-existent file name" do
       expect {
         subject.load!("blah.yml")
-      }.to raise_exception(Configurator::ConfigurationError,
+      }.to raise_exception(Configurative::ConfigurationError,
                            "Exception caught loading the 'blah.yml' configuration file.")
     end
 
     it "raises an exception if given an unsupported file type" do
       expect {
         subject.load!("blah.txt")
-      }.to raise_exception(Configurator::ConfigurationError,
+      }.to raise_exception(Configurative::ConfigurationError,
                            "Unsupported confguration file type 'text/plain' encountered.")
     end
   end

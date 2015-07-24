@@ -1,6 +1,6 @@
-# Configurator
+# Configurative
 
-Configurator is a library for handling basic configuration settings that was
+Configurative is a library for handling basic configuration settings that was
 heavily inspired by the Settingslogic library. I found Settingslogic to be an
 excellent library but I just needed some extra capabilities...
 
@@ -20,7 +20,7 @@ excellent library but I just needed some extra capabilities...
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'configurator'
+gem 'configurative'
 ```
 
 And then execute:
@@ -29,16 +29,16 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install configurator
+    $ gem install configurative
 
 ## Usage
 
 The intended mechanism of usage is to derive a class from the
-```Configurator::Settings``` class. You can then customize this to have your
+```Configurative::Settings``` class. You can then customize this to have your
 configuration settings come from one of a specific set of files. A basic
 implementation therefore might look like this...
 
-    class Configuration < Configurator::Settings
+    class Configuration < Configurative::Settings
       files File.join(Dir.getwd, "config", "application.yml")
     end
 
@@ -55,7 +55,7 @@ an environment variable (the library checks RAILS_ENV then RACK_ENV in that
 order for the environment setting) or by specify it explicitly in the class
 definition like this...
 
-    class Configuration < Configurator::Settings
+    class Configuration < Configurative::Settings
       files File.join(Dir.getwd, "config", "application.yml")
       environment ENV["MY_ENV"]
     end
@@ -75,7 +75,7 @@ specified. For example, if you had a configuration file like this...
 Then you could extract only the entries in the logging section by defining your
 class as follows...
 
-    class Configuration < Configurator::Settings
+    class Configuration < Configurative::Settings
       files File.join(Dir.getwd, "config", "application.yml")
       section "logging"
     end
@@ -128,7 +128,7 @@ You could access the value of three with a call such as this...
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/configurator/fork )
+1. Fork it ( https://github.com/[my-github-username]/configurative/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

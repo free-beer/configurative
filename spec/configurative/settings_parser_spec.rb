@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Configurator::SettingsParser do
+describe Configurative::SettingsParser do
   subject {
-    Configurator::SettingsParser.new
+    Configurative::SettingsParser.new
   }
 
   describe "#parse()" do
