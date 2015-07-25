@@ -1,0 +1,1 @@
+setting: <%= ENV["TEST_VALUE"] %>

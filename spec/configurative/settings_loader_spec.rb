@@ -114,4 +114,37 @@ describe Configurative::SettingsParser do
                            "Unsupported confguration file type 'text/plain' encountered.")
     end
   end
+
+  describe "templated source file" do
+    before do
+      ENV["TEST_VALUE"] = "Testing Value"
+    end
+
+    subject {
+      Configurative::SettingsLoader.new(section: "section2")
+    }
+
+    describe "from a YAML source" do
+      let(:path) {
+        File.join(Dir.getwd, "spec", "data", "template_test.yml")
+      }
+
+      it "loads and parses the template correctly" do
+        output = subject.load!(path)
+        expect(output.setting).to eq("Testing Value")
+      end
+    end
+
+
+    describe "from a JSON source" do
+      let(:path) {
+        File.join(Dir.getwd, "spec", "data", "template_test.json")
+      }
+
+      it "loads and parses the template correctly" do
+        output = subject.load!(path)
+        expect(output.setting).to eq("Testing Value")
+      end
+    end
+  end
 end

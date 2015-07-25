@@ -32,13 +32,13 @@ module Configurative
     end
 
     def load_yaml_file!(path)
-      extract_settings(YAML.load_file(path))
+      extract_settings(YAML.load(ERB.new(File.read(path)).result))
     rescue => error
       raise ConfigurationError.new("Exception caught loading the '#{path}' configuration file.", error)
     end
 
     def load_json_file!(path)
-      extract_settings(JSON.parse(File.read(path)))
+      extract_settings(JSON.parse(ERB.new(File.read(path)).result))
     rescue => error
       raise ConfigurationError.new("Exception caught loading the '#{path}' configuration file.", error)
     end
